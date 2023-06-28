@@ -8,7 +8,7 @@ const outputPath = path.resolve(CWD, 'dist')
 
 module.exports = {
   mode: 'development',
-  entry: './src/index.js',
+  entry: ['@babel/polyfill', './src/index.js'],
   output: {
     path: outputPath,
     filename: '[name].[hash].js'
@@ -22,6 +22,16 @@ module.exports = {
   ],
   module: {
     rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader",
+          options: {
+            presets: ["@babel/preset-env", "@babel/preset-react"]
+          }
+        },
+      },
       {
         test: /\.(css|less)$/,
         use: ['style-loader', 'css-loader', 'less-loader']
