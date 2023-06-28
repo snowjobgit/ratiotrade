@@ -1,0 +1,10 @@
+dist
+yarn-error.log
+npm-debug.log
+node_modules
+webpack/webpack-assets.json
+webpack/.cache
+junit.xml
+stats.json
+.idea
+yarn.lock

@@ -1,0 +1,11 @@
+node_modules
+npm-debug.log
+webpack/webpack-assets.json
+webpack/.cache
+junit.xml
+stats.json
+.idea
+.git
+.gitignore
+.env*
+Dockerfile
