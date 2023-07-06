@@ -17,7 +17,7 @@ module.exports = {
     port: 3003,
   },
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: ['.js', '.jsx', '.ts'],
   },
   plugins: [
     new HTMLWebpackPlugin({ template: './src/index.html'}),
@@ -26,12 +26,12 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.(js|ts)$/,
         exclude: /node_modules/,
         use: {
           loader: "babel-loader",
           options: {
-            presets: ["@babel/preset-env", "@babel/preset-react"]
+            presets: ["@babel/preset-env", "@babel/preset-typescript", "@babel/preset-react"]
           }
         },
       },
