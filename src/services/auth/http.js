@@ -15,4 +15,25 @@ api.interceptors.request.use((config) => {
   return config
 })
 
+api.interceptors.response.use((config) => {
+  return config
+}, async (error) => {
+  const originalRequest = error.config
+  if (error.response.status === 401 && error.config && !error.config._isRetry) {
+    // prevent cycle requests
+    originalRequest._isRetry = true
+
+    try {
+      const response = await axios.get(`${config.all.apis.users}/refresh`, { withCredentials: true })
+      localStorage.setItem('token', response.data.accessToken)
+      return api.request(originalRequest)
+    } catch (e) {
+      console.log('response interceptor error', e)
+    }
+  }
+
+  // go on top level if another error
+  throw error
+})
+
 export default api
